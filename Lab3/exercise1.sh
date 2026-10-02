@@ -27,4 +27,10 @@ fi
 # it calls ps -ef, then pipes it into word counter
 # then stores the result in ct
 ct=$(ps -ef | wc -l)
-echo "There are $ct processes running on this machine"
+
+# Compare the process count with the number supplied
+if [ "$ct" -gt "$1" ]; then
+    echo "Maximum number of processes exceeded."
+else
+    echo "The maximum number of processes Not exceeded."
+fi

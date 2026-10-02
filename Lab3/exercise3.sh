@@ -1,6 +1,11 @@
 #!/bin/bash
 
 # this is a comment
+# Ask the user where they want the output
+echo "Select output method:"
+echo "1. Write to screen"
+echo "2. Write to file"
+read -p "Enter your choice (1 or 2): " choice
 
 # for loop to count to 10
 for c in {1..5}; do
@@ -27,4 +32,10 @@ fi
 # it calls ps -ef, then pipes it into word counter
 # then stores the result in ct
 ct=$(ps -ef | wc -l)
-echo "There are $ct processes running on this machine"
+
+if [ "$ct" -gt "$1" ]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Maximum number of processes exceeded" >> process.log
+else
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - The maximum number of processes NOT exceeded" >> process.log
+fi
+

@@ -27,4 +27,10 @@ fi
 # it calls ps -ef, then pipes it into word counter
 # then stores the result in ct
 ct=$(ps -ef | wc -l)
-echo "There are $ct processes running on this machine"
+
+if [ "$ct" -gt "$1" ]; then
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Maximum number of processes exceeded" >> process.log
+else
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - The maximum number of processes NOT exceeded" >> process.log
+fi
+
